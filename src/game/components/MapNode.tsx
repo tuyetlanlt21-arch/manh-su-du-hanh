@@ -1,0 +1,3 @@
+import type { ChapterStatus } from '../gameTypes'
+type Props = { number: string; title: string; position: { x: number; y: number }; status: ChapterStatus; onClick: () => void }
+export function MapNode({ number, title, position, status, onClick }: Props) { return <button className={`map-node ${status.toLowerCase()}`} style={{ left: `${position.x}%`, top: `${position.y}%` }} onClick={onClick} aria-disabled={status === 'LOCKED'} aria-label={`${number} ${title}: ${status}`}><span className="node-orbit"/><span className="node-medallion">{status === 'LOCKED' ? '◆' : number}</span><span className="node-title">{title}</span></button> }

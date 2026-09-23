@@ -1,0 +1,17 @@
+import { createRoot } from 'react-dom/client'
+import { GameProvider } from './game/GameContext'
+import { Game } from './game/Game'
+import './styles/tokens.css'
+import './styles/game.css'
+import './styles/opening.css'
+import './styles/viewport-game.css'
+import './styles/hub.css'
+import './styles/round2.css'
+import './styles/round2-scenes.css'
+import './styles/memory-final-transition.css'
+import './styles/stabilization.css'
+import './styles/artifact-detail.css'
+import './styles/co-loa-entry-gate.css'
+import './styles/memory-flow.css'
+
+createRoot(document.getElementById('root')!).render(<GameProvider><Game /></GameProvider>)

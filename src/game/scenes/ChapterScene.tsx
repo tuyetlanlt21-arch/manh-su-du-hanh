@@ -1,0 +1,4 @@
+import { useGame } from '../GameContext'
+import { GameButton } from '../components/GameButton'
+import { BackButton } from '../components/BackButton'
+export function ChapterScene() { const { state, dispatch } = useGame(); const isFirstChapter = state.currentChapter === 'chapter-01'; return <section className="chapter-scene"><BackButton onClick={() => dispatch({ type: 'RETURN_TO_MAP' })}/><div className="chapter-panel"><p>CHƯƠNG 01</p><h1>{isFirstChapter ? 'KHỞI NGUYÊN' : 'HÀNH TRÌNH'}</h1><span>{isFirstChapter ? 'Điểm tích hợp dành cho nguyên mẫu khảo cổ đã được phê duyệt.' : 'Chương này chưa mở trong bản dựng hiện tại.'}</span><div><GameButton onClick={() => dispatch({ type: 'COMPLETE_CHAPTER', chapterId: 'chapter-01' })} disabled={!isFirstChapter}>HOÀN THÀNH THỬ</GameButton></div></div></section> }
