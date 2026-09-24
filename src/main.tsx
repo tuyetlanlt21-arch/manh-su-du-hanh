@@ -17,5 +17,9 @@ import './styles/round2-final.css'
 import './styles/round2-reward-final.css'
 import './styles/round2-wall-region-layers.css'
 import './styles/memory-restoration-polish.css'
+import './styles/memory-placed-fix.css'
+import './styles/round2-final-hotfix.css'
+import './styles/round2-memory-cinematic.css'
+import './styles/round2-memory-colors.css'
 
 createRoot(document.getElementById('root')!).render(<GameProvider><Game /></GameProvider>)
