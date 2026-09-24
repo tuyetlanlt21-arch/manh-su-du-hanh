@@ -1,7 +1,7 @@
 import { useState, type AnimationEvent } from 'react'
 import { useGame } from '../GameContext'
 import { BackButton } from '../components/BackButton'
-import coLoaMap from '../../assets/round2/environment/co-loa-map.png'
+import coLoaMap from '../../assets/round2/coloa/round2-co-loa-map.png'
 type PlaceId = 'outer-ring' | 'citadel-gate' | 'central-mound'
 const places: Array<{ id: PlaceId; label: string; x: number; y: number; note: string; correct?: boolean }> = [
   { id: 'citadel-gate', label: 'CỔNG THÀNH', x: 29, y: 57, note: 'Cổng thành gợi ra một không gian được tổ chức và bảo vệ, nhưng chưa phải dấu tích cần tìm.' },
