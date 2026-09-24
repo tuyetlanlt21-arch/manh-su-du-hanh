@@ -3,7 +3,7 @@ import { useGame } from '../GameContext'
 import { historicalArtifacts, historicalCharacters } from '../data/collectibles'
 import { BackButton } from '../components/BackButton'
 import fragmentOne from '../../assets/round1/rewards/fragment-01.png'
-import fragmentTwo from '../../assets/round2/rewards/fragment-02.png'
+import fragmentTwo from '../../assets/round1/rewards/fragment-01.png'
 
 type ArchiveKind = 'CHARACTER' | 'ARTIFACT'
 type ArtifactTab = 'artifacts' | 'fragments'

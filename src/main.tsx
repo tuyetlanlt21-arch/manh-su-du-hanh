@@ -13,5 +13,9 @@ import './styles/stabilization.css'
 import './styles/artifact-detail.css'
 import './styles/co-loa-entry-gate.css'
 import './styles/memory-flow.css'
+import './styles/round2-final.css'
+import './styles/round2-reward-final.css'
+import './styles/round2-wall-region-layers.css'
+import './styles/memory-restoration-polish.css'
 
 createRoot(document.getElementById('root')!).render(<GameProvider><Game /></GameProvider>)
