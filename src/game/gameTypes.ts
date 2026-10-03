@@ -1,4 +1,4 @@
-export type Scene = 'HOME' | 'TRAVELER_SELECTION' | 'MAP' | 'CHARACTER_ARCHIVE' | 'ARTIFACT_ARCHIVE' | 'ARTIFACT_DETAIL' | 'CHAPTER' | 'EXCAVATION' | 'PUZZLE' | 'ARTIFACT_REVEAL' | 'ROUND_COMPLETE' | 'ROUND_TWO_COMPLETE' | 'MEMORY_GAME' | 'CO_LOA_ENTRY' | 'REWARD'
+export type Scene = 'HOME' | 'TRAVELER_SELECTION' | 'MAP' | 'CHARACTER_ARCHIVE' | 'ARTIFACT_ARCHIVE' | 'ARTIFACT_DETAIL' | 'CHAPTER' | 'EXCAVATION' | 'PUZZLE' | 'ARTIFACT_REVEAL' | 'ROUND_COMPLETE' | 'ROUND_TWO_COMPLETE' | 'MEMORY_GAME' | 'CO_LOA_ENTRY' | 'ROUND_THREE_INTRO' | 'ROUND_THREE_GAME1' | 'ROUND_THREE_GAME2' | 'ROUND_THREE_COMPLETE' | 'ROUND_THREE_GAME1_COMPLETE' | 'REWARD'
 export type TravelerId = 'male' | 'female'
 export type ChapterStatus = 'LOCKED' | 'AVAILABLE' | 'COMPLETED'
 export type GameState = { currentScene: Scene; playerName: string; selectedTraveler: TravelerId | null; currentChapter: string | null; currentArtifact: string | null; reconstructedArtifacts: string[]; completedChapters: string[]; completedActivities: string[]; collectedArtifacts: string[]; collectedCharacters: string[]; collectedFragments: string[] }
@@ -16,6 +16,11 @@ export type GameAction =
   | { type: 'ENTER_CHAPTER'; chapterId: string }
   | { type: 'START_EXCAVATION' }
   | { type: 'START_MEMORY_GAME' }
+  | { type: 'START_ROUND_THREE' }
+  | { type: 'START_ROUND_THREE_GAME1' }
+  | { type: 'COMPLETE_ROUND_THREE_GAME1' }
+  | { type: 'SHOW_ROUND_THREE_REWARD' }
+  | { type: 'COMPLETE_ROUND_THREE' }
   | { type: 'COMPLETE_MEMORY_GAME' }
   | { type: 'RETURN_TO_CHAPTER' }
   | { type: 'ENTER_CO_LOA' }
