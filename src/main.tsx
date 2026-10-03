@@ -21,5 +21,7 @@ import './styles/memory-placed-fix.css'
 import './styles/round2-final-hotfix.css'
 import './styles/round2-memory-cinematic.css'
 import './styles/round2-memory-colors.css'
+import './styles/round3.css'
+import './styles/round3-hotfix.css'
 
 createRoot(document.getElementById('root')!).render(<GameProvider><Game /></GameProvider>)

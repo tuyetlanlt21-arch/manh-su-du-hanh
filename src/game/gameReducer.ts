@@ -15,6 +15,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'ENTER_CHAPTER': return { ...state, currentScene: 'CHAPTER', currentChapter: action.chapterId }
     case 'START_EXCAVATION': return state.currentChapter === 'chapter-01' ? { ...state, currentScene: 'EXCAVATION', currentArtifact: null } : state
     case 'START_MEMORY_GAME': return state.currentChapter === 'chapter-02' ? { ...state, currentScene: 'MEMORY_GAME' } : state
+    case 'START_ROUND_THREE': return state.currentChapter === 'chapter-03' ? { ...state, currentScene: 'ROUND_THREE_GAME1' } : state
+    case 'START_ROUND_THREE_GAME1': return state.currentChapter === 'chapter-03' ? { ...state, currentScene: 'ROUND_THREE_GAME1' } : state
+    case 'COMPLETE_ROUND_THREE_GAME1': return state.currentScene === 'ROUND_THREE_GAME1' ? { ...state, currentScene: 'ROUND_THREE_GAME2' } : state
+    case 'SHOW_ROUND_THREE_REWARD': return state.currentScene === 'ROUND_THREE_GAME2' ? { ...state, currentScene: 'ROUND_THREE_COMPLETE' } : state
+    case 'COMPLETE_ROUND_THREE': return state.currentScene === 'ROUND_THREE_COMPLETE' && !state.completedChapters.includes('chapter-03') ? { ...state, completedChapters: [...state.completedChapters, 'chapter-03'], collectedFragments: state.collectedFragments.includes('fragment-03') ? state.collectedFragments : [...state.collectedFragments, 'fragment-03'], collectedCharacters: [...new Set([...state.collectedCharacters, 'trung-vuong', 'dinh-bo-linh', 'ly-cong-uan', 'ho-quy-ly', 'quang-trung'])] } : state
     case 'COMPLETE_MEMORY_GAME': return state.currentChapter === 'chapter-02' && !state.completedActivities.includes('chapter-02-memory') ? { ...state, completedActivities: [...state.completedActivities, 'chapter-02-memory'] } : state
     case 'RETURN_TO_CHAPTER': return state.currentChapter ? { ...state, currentScene: 'CHAPTER' } : state
     case 'ENTER_CO_LOA': return state.currentChapter === 'chapter-02' && state.completedActivities.includes('chapter-02-memory') ? { ...state, currentScene: 'CO_LOA_ENTRY' } : state
