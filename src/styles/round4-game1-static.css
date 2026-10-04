@@ -1,0 +1,2 @@
+/* Game 1 failure-only exit: no teleport before the feedback overlay. */
+.phase-failure-exit .yuan{animation:round4EnemyEscape .85s ease-in forwards!important}.phase-failure-exit .dai-viet{animation:round4AllyEscape .85s ease-in forwards!important}@keyframes round4EnemyEscape{to{opacity:0;transform:translate3d(70%,50%,0) scale(.68) rotate(-3deg)}}@keyframes round4AllyEscape{to{opacity:0;transform:translate3d(-110%,62%,0) scaleX(-1) scale(.54) rotate(7deg)}}
