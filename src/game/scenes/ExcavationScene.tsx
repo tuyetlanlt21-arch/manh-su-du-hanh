@@ -20,6 +20,6 @@ export function ExcavationScene() {
       return <button key={artifact.id} className={`dig-site site-${index + 1} ${done ? 'is-found' : ''} ${digging === artifact.id ? 'is-digging' : ''}`} disabled={done || Boolean(digging) || complete} onClick={() => setDigging(artifact.id)}><span className="site-glow"/><span className="site-marker">{done ? 'ĐÃ PHỤC DỰNG' : artifact.discovery}</span><i/></button>
     })}</div>
     {digging && <div className="digging-caption"><span>ĐẤT ĐANG MỞ LỐI</span><b>Những mảnh vỡ đang lộ diện…</b></div>}
-    {complete && <div className="excavation-complete"><p>ĐÃ KHÔI PHỤC DẤU TÍCH</p><h2>3 / 3</h2><button className="game-button" onClick={() => dispatch({ type: 'COMPLETE_ROUND_ONE' })}>NHẬN MẢNH SỬ I</button></div>}
+    {complete && <div className="excavation-complete"><p>ĐÃ KHÔI PHỤC DẤU TÍCH</p><h2>3 / 3</h2><button className="game-button" onClick={() => dispatch({ type: 'SHOW_ROUND_COMPLETION' })}>HOÀN TẤT KHAI QUẬT</button></div>}
   </section>
 }

@@ -167,7 +167,7 @@ export function MemoryGameScene() {
     later(() => setSuccess(true), 320);
     later(() => setWall(2), 900);
     later(() => setWall(3), 1650);
-    later(() => dispatch({ type: "COMPLETE_ROUND_TWO" }), 4050);
+    later(() => dispatch({ type: "SHOW_ROUND_COMPLETION" }), 4050);
   };
   const inter = phase === "COLOA_MEMORY_RESTORED" || phase === "COLOA_INTERSTITIAL_ENTER" || phase === "COLOA_INTERSTITIAL_READY",
     map =

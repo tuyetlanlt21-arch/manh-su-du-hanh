@@ -13,7 +13,7 @@ import parisNegotiation from '../../assets/round5/artifacts/paris-negotiation.pn
 import parisAgreement from '../../assets/round5/artifacts/paris-agreement-1973.png'
 import liberation from '../../assets/round5/artifacts/liberation-1975.png'
 
-type ExcavationPhase = 'intro' | 'dig' | 'cinematic' | 'reward'
+type ExcavationPhase = 'dig' | 'cinematic' | 'reward'
 type HookMotion = 'idle' | 'aiming' | 'dropping' | 'attached' | 'pulling' | 'question'
 type Artifact = { id: string; year: string; title: string; question: string; options: string[]; correctAnswer: string; explanation: string; asset: string; chestPosition: { x: number; y: number }; scale: number; rotation: number }
 type Trajectory = { targetChestId: string; dx: number; dy: number; angle: number; distance: number; startLength: number; endLength: number }
@@ -40,7 +40,7 @@ export function RoundFiveScene() {
   const runId = useRef(0)
   const angle = useRef(0)
   const trajectoryRef = useRef<Trajectory | null>(null)
-  const [phase, setPhase] = useState<ExcavationPhase>('intro')
+  const [phase, setPhase] = useState<ExcavationPhase>('dig')
   const [motion, setMotion] = useState<HookMotion>('idle')
   const [solved, setSolved] = useState<string[]>([])
   const [activeId, setActiveId] = useState<string | null>(null)
@@ -53,10 +53,7 @@ export function RoundFiveScene() {
   const active = artifacts.find((item) => item.id === activeId) ?? null
   const unlockedFinal = solved.length >= 6
 
-  useEffect(() => {
-    const introTimer = window.setTimeout(() => setPhase('dig'), 2300)
-    return () => { window.clearTimeout(introTimer); clearMotion(); if (frame.current !== null) cancelAnimationFrame(frame.current) }
-  }, [])
+  useEffect(() => () => { clearMotion(); if (frame.current !== null) cancelAnimationFrame(frame.current) }, [])
 
   useEffect(() => {
     if (phase !== 'dig' || motion !== 'idle') return
@@ -140,7 +137,6 @@ export function RoundFiveScene() {
   return <section ref={sceneRef} className={`round5 round5-${phase}`} style={sceneStyle}>
     <img className="round5-background" src={excavationSite} alt="Khu khai quật tư liệu lịch sử" />
     <div className="round5-sepia" />
-    {phase === 'intro' && <div className="round5-intro"><p>ROUND V</p><h1>KHAI QUẬT LỊCH SỬ</h1><span>“Những trang sử đang chờ được đánh thức.”</span></div>}
     {phase === 'dig' && <>
       <header className="round5-hud"><div><p>HIỆN VẬT ĐÃ KHÔI PHỤC</p><strong>{solved.length} / 7</strong></div><div className="round5-timeline" aria-label="Dòng thời gian lịch sử">{artifacts.map((item) => <div key={item.id} className={solved.includes(item.id) ? 'restored' : ''}><small>{item.year}</small>{solved.includes(item.id) && <img src={item.asset} alt="" />}</div>)}</div></header>
       <div ref={pivotRef} className={`round5-hook-pivot motion-${motion}`} aria-hidden="true"><div className="round5-arm"><div className="round5-rope"><div className="round5-endpoint"><div className="round5-hook-image"><img src={hookImage} alt="" /></div>{active && ['attached', 'pulling'].includes(motion) && <div className="round5-carried-chest" style={{ '--attached-scale': active.scale, '--attached-rotation': `${active.rotation}deg` } as CSSProperties}><img src={chestImage} alt="" /></div>}</div></div></div></div>
@@ -148,6 +144,6 @@ export function RoundFiveScene() {
       {motion === 'question' && active && <div className={`round5-document ${wrong ? 'answer-wrong' : ''}`} role="dialog" aria-modal="true" aria-labelledby="round5-question"><div className="round5-document-art"><img className={selected === active.correctAnswer ? 'restored' : ''} src={active.asset} alt="Hiện vật vừa khai quật" /></div><div className="round5-document-copy"><p>{active.year} · HỒ SƠ VỪA KHAI QUẬT</p><h2 id="round5-question">{active.question}</h2><div className="round5-options">{options.map((option, index) => <button key={option} disabled={Boolean(selected)} className={`${selected === option ? (option === active.correctAnswer ? 'correct' : 'incorrect') : ''}`} onClick={() => answer(option)}><b>{letters[index]}</b>{option}</button>)}</div>{wrong ? <div className="round5-retry"><strong>HIỆN VẬT CHƯA THỂ KHÔI PHỤC</strong><span>Hãy xem lại và thử lại.</span><button onClick={retryAnswer}>THỬ LẠI</button></div> : selected === active.correctAnswer ? <div className="round5-explanation">{active.explanation}</div> : null}</div></div>}
     </>}
     {phase === 'cinematic' && <div className="round5-cinematic"><header><p>HIỆN VẬT ĐÃ KHÔI PHỤC</p><strong>7 / 7</strong></header><div className="round5-cinematic-artifacts">{solvedItems.map((item, index) => <figure key={item.id} style={{ '--order': index } as CSSProperties}><img src={item.asset} alt="" /><figcaption>{item.year}</figcaption></figure>)}</div><i/><p>LỊCH SỬ KHÔNG CHỈ ĐƯỢC<br/>TẠO NÊN BỞI NHỮNG TRẬN CHIẾN</p><strong>MẢNH SỬ ĐÃ ĐƯỢC KHÔI PHỤC</strong></div>}
-    {phase === 'reward' && <FragmentRewardScene className="round5-reward" background={excavationSite} fragmentNumber={5} fragmentAsset={fragment} title="ĐÃ ĐƯỢC KHÔI PHỤC" description="Mảnh Sử thứ năm đã được lưu vào hành trang." buttonLabel="THU THẬP MẢNH SỬ" onCollect={() => dispatch({ type: 'COMPLETE_ROUND_FIVE' })} onFinished={() => dispatch({ type: 'RETURN_TO_MAP' })} />}
+    {phase === 'reward' && <FragmentRewardScene className="round-fragment-reward round5-reward" background={excavationSite} fragmentNumber={5} fragmentAsset={fragment} title="ĐÃ ĐƯỢC KHÔI PHỤC" description="Mảnh Sử thứ năm đã được lưu vào hành trang." buttonLabel="THU THẬP MẢNH SỬ" onCollect={() => dispatch({ type: 'COMPLETE_ROUND_FIVE' })} onFinished={() => dispatch({ type: 'RETURN_TO_MAP' })} />}
   </section>
 }
