@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { FragmentRewardScene } from '../components/FragmentRewardScene'
 import { useGame } from '../GameContext'
 import riverLow from '../../assets/round4/backgrounds/river-low.png'
 import riverHigh from '../../assets/round4/backgrounds/river-high.png'
@@ -8,7 +7,6 @@ import riverDry from '../../assets/round4/backgrounds/river-dry.png'
 import stake from '../../assets/round4/battlefield/wooden-stake.png'
 import daiVietBoat from '../../assets/round4/battlefield/dai-viet-boat.png'
 import yuanWarship from '../../assets/round4/battlefield/yuan-warship.png'
-import fragment from '../../assets/round4/rewards/fragment-04.png'
 
 type Phase = 'place' | 'tide-rise' | 'lure-ready' | 'luring' | 'waiting' | 'golden' | 'cinematic' | 'game-one-exit' | 'failure-exit' | 'strategy' | 'restoring' | 'reward'
 type Failure = 'early' | 'late' | 'timeout' | null
@@ -48,7 +46,7 @@ export function RoundFourScene() {
   const finishPlacement = () => { if (stakes.length < 5) return; setPhase('tide-rise'); later(() => setPhase('lure-ready'), 4500) }
   const lure = () => { if (phase !== 'lure-ready') return; setPhase('luring'); later(() => setPhase('waiting'), 8800); later(() => setPhase('golden'), 11200); later(() => fail('late'), 14800) }
   const ambush = () => { if (phase === 'waiting') { fail('early'); return }; if (phase !== 'golden') return; clearTimers(); setPhase('cinematic'); later(() => setPhase('game-one-exit'), 2200); later(() => setPhase('strategy'), 2550) }
-  const beginRestore = () => { if (!choice) return; setPhase('restoring'); later(() => setPhase('reward'), 2700) }
+  const beginRestore = () => { if (!choice) return; clearTimers(); dispatch({ type: 'SHOW_ROUND_COMPLETION' }) }
   const selected = STRATEGIES.find(([id]) => id === choice)
   const tideScene = phase === 'place' ? 'low' : phase === 'tide-rise' || phase === 'lure-ready' || phase === 'luring' ? 'high' : phase === 'waiting' || phase === 'golden' || phase === 'failure-exit' ? 'mid' : 'dry'
   const reason = failure === 'early' ? 'Nước chưa rút, cọc chưa lộ, địch còn có thể thoát.' : failure === 'late' ? 'Nước đã rút quá sâu, địch kịp thoát khỏi trận địa.' : 'Thời cơ không chờ đợi ai.'
@@ -63,7 +61,5 @@ export function RoundFourScene() {
       {phase === 'cinematic' || phase === 'game-one-exit' ? <div className="round4-cinematic"><p>THỦY TRIỀU RÚT</p><strong>TRẬN ĐỊA ĐÃ KÍCH HOẠT</strong></div> : null}</>}
     {failure && <div className="round4-fail"><div><p>TRẬN ĐỊA CHƯA PHÁT HUY TÁC DỤNG.</p><span>{reason}</span><button className="game-button" onClick={retry}>CHƠI LẠI</button></div></div>}
     {phase === 'strategy' && <div className="round4-strategy"><header><p>ROUND IV · CHỌN CHIẾN LƯỢC</p><h1>Quân đối phương đông hơn.<br/>Bạn sẽ lựa chọn cách nào?</h1></header><div className="round4-choices">{STRATEGIES.map(([id, title]) => <button key={id} className={`round4-choice ${choice === id ? `selected choice-${id}` : ''}`} onClick={() => setChoice(id)}><em>{id}</em><b>{title}</b></button>)}</div>{selected && <div className={`round4-explanation choice-${selected[0]}`}><p>{selected[2]}</p><div><button onClick={() => setChoice(null)}>XEM LỰA CHỌN KHÁC</button><button className="game-button" onClick={beginRestore}>TIẾP TỤC</button></div></div>}</div>}
-    {phase === 'restoring' && <div className="round4-restoring"><p>MẢNH SỬ</p><strong>ĐÃ ĐƯỢC KHÔI PHỤC</strong></div>}
-    {phase === 'reward' && <FragmentRewardScene className="round4-reward" background={riverMid} fragmentNumber={4} fragmentAsset={fragment} title="NON SÔNG" description="Mảnh Sử thứ tư đã được lưu vào hành trang." buttonLabel="THU THẬP MẢNH SỬ" onCollect={() => dispatch({ type: 'COMPLETE_ROUND_FOUR' })} onFinished={() => dispatch({ type: 'RETURN_TO_MAP' })} />}
   </section>
 }
