@@ -26,7 +26,86 @@
 
 .phase-correct-animation .round3-timeline-line{animation:round3TimelineRestore 1.3s ease both}@keyframes round3TimelineRestore{from{transform:scaleX(0);transform-origin:left;box-shadow:none}to{transform:scaleX(1);transform-origin:left;box-shadow:0 0 18px #f7d574}}
 
+/* Round III Game 1 redesign. The map stage keeps the source artwork's 3:2
+   coordinate system; every marker remains positioned against this stage. */
+.round3-game1{display:block;min-height:100%;height:100%;background:#10251e;overflow:hidden}
+.round3-game1:before{z-index:0;background:radial-gradient(circle at 76% 45%,#4d6b5233,transparent 42%),linear-gradient(110deg,#0b1d16,#18352a 58%,#0e2119)}
+.round3-game1:after{z-index:0;inset:0;background:linear-gradient(90deg,#091a13aa,#0b1c1499),url('../assets/round3/game1/map/vietnam-map.png') center/cover;filter:blur(18px) saturate(.7);opacity:.36}
+.round3-game1>.back-button{z-index:70;top:24px;left:24px}
+.round3-game1-layout{position:relative;z-index:3;display:grid;grid-template-columns:minmax(260px,34%) minmax(0,66%);gap:clamp(18px,3vw,52px);width:min(1480px,calc(100% - 96px));height:100%;margin:0 auto;padding:clamp(28px,4vh,54px) clamp(22px,2vw,40px);box-sizing:border-box}
+.round3-character-panel{position:relative;z-index:10;display:flex;flex-direction:column;min-width:0;padding:clamp(68px,9vh,112px) clamp(22px,3vw,48px) clamp(24px,4vh,48px);border:1px solid #d3b66a80;background:linear-gradient(155deg,#17372bcf,#0a1c15e6 74%);box-shadow:inset 0 1px #ffffff12,0 24px 50px #06100b66;overflow:visible}
+.round3-character-panel:before{content:'';position:absolute;inset:12px;border:1px solid #d6b96a2d;pointer-events:none}
+.round3-game1-kicker{position:relative;margin:0;color:#e4c36e;font-size:10px;font-weight:800;letter-spacing:.2em}
+.round3-character-panel h1{position:relative;margin:10px 0 0;color:#f5e5b4;font-family:var(--font-display);font-size:clamp(24px,3vw,48px);font-weight:500;line-height:1.02;letter-spacing:.1em}
+.round3-game1 .round3-character-frame{position:relative;display:flex;align-items:center;justify-content:center;flex:1;min-height:260px;margin:clamp(20px,4vh,48px) 0 8px;border-top:1px solid #d1b3654f;border-bottom:1px solid #d1b3654f;background:radial-gradient(ellipse at 50% 42%,#b99a5120,transparent 53%)}
+.round3-character-frame:after{content:'KÉO THẢ';position:absolute;left:0;right:0;bottom:13px;color:#dbbd6d80;font-size:9px;letter-spacing:.24em;text-align:center;pointer-events:none}
+.round3-character-copy{position:relative;display:flex;flex-direction:column;gap:7px;color:#eee0bc}
+.round3-character-copy strong{color:#f0cc76;font-family:var(--font-display);font-size:clamp(18px,1.8vw,27px);font-weight:500;letter-spacing:.06em}
+.round3-character-copy span{color:#d7b563;font-size:10px;font-weight:800;letter-spacing:.18em}
+.round3-character-copy p{max-width:220px;margin:2px 0 0;color:#c3cbbd;font-size:11px;line-height:1.5}
+.round3-map-panel{position:relative;z-index:20;display:flex;flex-direction:column;justify-content:center;min-width:0;padding-top:clamp(18px,4vh,52px)}
+.round3-map-panel .round3-game1-header{position:relative;z-index:5;top:auto;left:auto;transform:none;height:auto;margin:0 0 clamp(14px,2vh,24px);text-align:left;pointer-events:none;background:none}
+.round3-map-panel .round3-game1-header p{margin:0;color:#d5b566;font-size:10px;letter-spacing:.2em}
+.round3-map-panel .round3-game1-header h2{margin:7px 0 0;color:#f4e3b5;font-family:var(--font-display);font-size:clamp(27px,3.2vw,52px);font-weight:500;letter-spacing:.1em;line-height:1}
+.round3-map-stage{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:3 / 2;margin:0;overflow:visible;z-index:2;border:1px solid #d8bb6d80;background:#0d241b99;box-shadow:0 20px 45px #06120d88,inset 0 0 0 1px #fff1}
+.round3-map-image{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.round3-location{z-index:20}
+.round3-drop-zone{width:clamp(42px,5.5vw,84px);height:clamp(42px,5.5vw,84px);border:1px solid #f2d17c33;background:#e7c56b08;transition:background .16s,box-shadow .16s}
+.round3-location.is-completed .round3-drop-zone{background:#f3d27512;box-shadow:0 0 0 8px #f3d27512,0 0 28px #f3d2752a}
+.round3-marker-dot{display:grid;place-items:center;width:13px;height:13px;background:#8e682c;box-shadow:0 0 0 4px #efc9652e,0 0 13px #ecc96788}
+.round3-marker-dot b{color:#392b12;font-size:12px;line-height:1}
+.round3-location.is-completed .round3-marker-dot{background:#efca6d;box-shadow:0 0 0 5px #f2ce6b44,0 0 22px #f4d26f}
+.round3-location-label{font-size:clamp(9px,.8vw,13px);background:#10271dd9;box-shadow:0 2px 8px #06120dcc}
+.round3-game1 .round3-active-character{position:relative;z-index:30;left:auto;top:auto;right:auto;bottom:auto;display:block;flex:0 1 auto;width:clamp(150px,17vw,250px);height:clamp(250px,48vh,500px);max-width:100%;max-height:100%;margin:auto;padding:0;border:0;background:transparent;color:#f5e6bb;cursor:grab;touch-action:none;user-select:none;transform:none;transition:opacity .32s ease,filter .32s ease;animation:none}
+.round3-game1 .round3-active-character img{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 18px 14px #06110dcc);pointer-events:none}
+.round3-game1 .round3-active-character.is-drag-source-hidden{visibility:hidden;opacity:0}
+.round3-game1 .round3-drag-layer{position:fixed;z-index:15;left:var(--round3-drag-left);top:var(--round3-drag-top);display:block;width:clamp(44px,6vw,70px);height:clamp(65px,8vh,85px);margin:0;padding:0;border:0;background:transparent;pointer-events:none;transform:none;opacity:.85;filter:drop-shadow(0 6px 6px #06110d99)}
+.round3-game1 .round3-drag-layer img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;pointer-events:none}
+.round3-game1 .round3-drag-layer.is-correct{opacity:0;transform:scale(.7);transition:opacity .52s ease,transform .52s cubic-bezier(.22,1,.36,1)}
+.round3-game1.handoff-correct .round3-drag-layer.is-correct{opacity:.85;transform:none;transition:none}
+.round3-game1.handoff-exit .round3-drag-layer.is-correct{opacity:0;transform:scale(.94);transition:opacity .2s ease,transform .2s ease}
+.round3-game1 .round3-active-character.is-entering{animation:round3Game1CharacterFadeIn .36s cubic-bezier(.22,1,.36,1);transition:none;transform:none}
+.round3-game1.status-opening-exit .round3-active-character{animation:round3CharacterEnter .42s .12s ease both}
+.round3-game1 .round3-active-character.is-dragging,.round3-game1 .round3-active-character.is-correct{position:fixed;left:var(--round3-drag-left);top:var(--round3-drag-top);right:auto;bottom:auto;width:clamp(72px,7.5vw,112px);height:clamp(120px,18vh,220px);max-width:none;max-height:none;margin:0;transform:none;transition:none}
+.round3-active-character.is-dragging{z-index:100;cursor:grabbing;filter:drop-shadow(0 0 16px #e9c566bb)}
+.round3-active-character.is-correct{z-index:100;opacity:0;transform:scale(.34);transform-origin:center center;transition:transform .52s cubic-bezier(.22,1,.36,1),opacity .52s ease;filter:drop-shadow(0 0 18px #f4d16e)}
+.round3-drag-indicator{position:fixed;z-index:110;left:var(--round3-pointer-x);top:var(--round3-pointer-y);width:14px;height:14px;border:2px solid #f7d77d;border-radius:50%;background:#d5a94966;box-shadow:0 0 0 5px #f1ca6b22,0 0 16px #f4d273;pointer-events:none;transform:translate(-50%,-50%);opacity:1}
+.round3-game1 .round3-location.is-drop-active .round3-marker-dot{z-index:8;background:#f0cb6c;box-shadow:0 0 0 7px #f3d47155,0 0 24px #f8d77e;transform:translate(-50%,-50%) scale(1.16)}
+.round3-game1 .round3-location.is-drop-active .round3-location-label{z-index:9;border-left-color:#f4d477;background:#18261cf2;box-shadow:0 2px 12px #06120dee}
+.round3-game1 .round3-location.is-completed.is-drop-active .round3-marker-dot{background:#efca6d;box-shadow:0 0 0 5px #f2ce6b44,0 0 22px #f4d26f}
+.round3-feedback{z-index:80;left:50%;bottom:5%;min-width:0;padding:10px 18px;border-color:#d8b66899;background:#152920ee;box-shadow:0 8px 24px #06130e99}
+.round3-game1 .round3-restored{z-index:90}
+.round3-game1-opening-panel{z-index:120;background:#07171066}
+.round3-game1-opening-inner{width:min(86%,620px)}
+.status-completed .round3-map-stage:after{z-index:40}
+@keyframes round3ReturnToPanel{from{opacity:.2;transform:translate(-50%,-42%) scale(.94)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes round3Game1CharacterFadeIn{from{opacity:0}to{opacity:1}}
+.round3-game1.status-completed .round3-map-stage:after{opacity:0;animation:none}
+.round3-game1-outro{position:absolute;z-index:65;inset:0;display:grid;place-items:center;pointer-events:none;color:#f4e1ab;text-align:center}
+.round3-game1-outro-shade{position:absolute;inset:0;background:#071b16;opacity:0;transition:opacity .4s ease}
+.round3-game1-outro-message{position:absolute;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .4s ease}
+.round3-game1-outro-message{inset:0;gap:8px;padding:24px}
+.round3-game1-outro-message b{color:#e6c36d;font-size:clamp(12px,1.5vw,19px);font-weight:800;letter-spacing:.24em}
+.round3-game1-outro-message strong{color:#f7e5b0;font-family:var(--font-display);font-size:clamp(27px,4vw,58px);font-weight:500;letter-spacing:.12em;line-height:1.08}
+.round3-game1-outro-message span{max-width:520px;margin-top:7px;color:#d7c99f;font-size:clamp(11px,1.1vw,14px);letter-spacing:.06em}
+.round3-game1-outro.outro-message .round3-game1-outro-shade{opacity:.42}
+.round3-game1-outro.outro-message .round3-game1-outro-message{opacity:1}
+.round3-game1-outro.outro-fade .round3-game1-outro-shade,.round3-game1-outro.outro-fade .round3-game1-outro-message{opacity:0}
+@media(max-width:640px){.round3-game1-outro-message strong{font-size:clamp(24px,8vw,38px)}.round3-game1-outro-message span{max-width:82vw}}
+@media(max-width:900px){.round3-game1-layout{grid-template-columns:minmax(190px,31%) minmax(0,69%);gap:16px;width:calc(100% - 42px);padding:22px 12px}.round3-character-panel{padding-inline:16px}.round3-character-panel h1{font-size:clamp(19px,3.5vw,32px)}.round3-game1 .round3-character-frame{min-height:220px}.round3-character-copy p{font-size:10px}.round3-map-panel{padding-top:52px}.round3-map-panel .round3-game1-header h2{font-size:clamp(23px,3.8vw,36px)}}
+@media(max-width:640px){.round3-game1-layout{display:flex;flex-direction:column;gap:12px;width:100%;padding:70px 12px 12px;overflow:auto}.round3-character-panel{flex:0 0 230px;min-height:230px;padding:18px 18px 14px}.round3-character-panel h1{display:none}.round3-game1 .round3-character-frame{min-height:0;margin:10px 0 7px}.round3-game1 .round3-character-frame:after{display:none}.round3-character-copy{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 12px}.round3-character-copy p{grid-column:1 / -1;max-width:none;margin:0}.round3-map-panel{flex:0 0 auto;padding:0}.round3-map-panel .round3-game1-header{margin:0 0 8px}.round3-map-panel .round3-game1-header p{font-size:8px}.round3-map-panel .round3-game1-header h2{font-size:26px}.round3-map-stage{flex:0 0 auto}.round3-game1>.back-button{top:18px;left:18px}.round3-location-label{font-size:8px;padding:2px 3px}.round3-game1 .round3-active-character{width:150px;height:210px}.round3-feedback{bottom:12px}}
+@media(prefers-reduced-motion:reduce){.round3-game1 *,.round3-game1 *:before,.round3-game1 *:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
 .round-three-reward{min-height:100dvh}.round-three-reward .reward-stage{position:relative;min-height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.8fr);align-items:center;gap:clamp(32px,7vw,110px);padding:clamp(48px,9vw,140px);background:var(--fragment-reward-background) center/cover no-repeat;overflow:hidden}.round-three-reward .reward-settle{background:#07130c99;opacity:1}.round-three-reward .reward-content{position:relative;z-index:2;left:auto;top:auto;width:auto;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(12px,1.5vw,24px);margin:0;opacity:1;animation:none}.round-three-reward .reward-content h1,.round-three-reward .reward-content p,.round-three-reward .reward-content span{margin:0}.round-three-reward .fragment-return{position:static;margin:0;opacity:1;animation:none}.round-three-reward .fragment-visual{position:relative;z-index:2;right:auto;width:min(30vw,390px);max-height:62vh;justify-self:center;object-fit:contain}@media(max-width:720px){.round-three-reward .reward-stage{grid-template-columns:1fr;gap:22px;padding:48px 9%}.round-three-reward .reward-content{align-items:center;text-align:center}.round-three-reward .fragment-visual{width:min(55vw,290px);grid-row:1}}
 
 /* Game 2 uses one vertical flow: header, timeline, then event tray. */
 .round3-game2-content{display:grid;grid-template-rows:auto minmax(0,1fr) auto;align-content:start;gap:clamp(20px,3vh,34px);height:100%;box-sizing:border-box;overflow-y:auto;overflow-x:hidden;padding:clamp(34px,6vh,68px) clamp(38px,6vw,110px) 112px}.round3-game2-header{position:relative!important;display:block!important;height:auto!important;min-height:0!important;padding:0 clamp(130px,13vw,220px) 0 0!important;text-align:left!important}.round3-game2-header p{margin:0!important;line-height:1.35}.round3-game2-header h1{margin:clamp(8px,1.2vh,14px) 0 0!important;font-size:clamp(25px,3vw,42px)!important;line-height:1.12!important}.round3-game2-header strong{right:0!important;top:0!important}.round3-timeline{width:100%!important;height:auto!important;min-height:clamp(168px,24vh,252px);margin:0!important;gap:clamp(12px,1.2vw,20px)!important;align-items:start!important;padding:0 clamp(18px,2.8vw,54px);box-sizing:border-box}.round3-timeline-line{top:clamp(52px,7vh,76px)!important;left:clamp(8%,10vw,12%)!important;right:clamp(8%,10vw,12%)!important}.round3-year>b{font-size:clamp(20px,2vw,32px)!important;line-height:1.2}.round3-year>i{margin:clamp(15px,2vh,22px) 0!important}.round3-year-drop,.round3-year .round3-event-card{min-height:clamp(78px,10vh,100px)!important;height:auto!important}.round3-event-tray{width:100%!important;margin:0!important;padding:clamp(4px,1vh,10px) 0 0!important}.round3-event-tray:before{margin:0 0 clamp(20px,2.5vh,28px)!important}.round3-event-tray h2{margin:0 0 clamp(14px,1.8vh,19px)!important}.round3-event-tray>div{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:clamp(12px,1vw,20px)!important}.round3-event-card{min-height:clamp(94px,13vh,132px);padding:clamp(12px,1.15vw,18px)!important}.round3-event-card p{font-size:clamp(10px,.83vw,13px)!important;line-height:1.55!important}.round3-game2 .round3-confirm{bottom:20px!important}@media(max-height:800px){.round3-game2-content{gap:16px;padding-top:26px}.round3-timeline{min-height:146px}.round3-year>i{margin:10px 0!important}.round3-year-drop,.round3-year .round3-event-card{min-height:68px!important}.round3-event-card{min-height:82px;padding:9px!important}.round3-event-card p{line-height:1.4!important}.round3-event-tray:before{margin-bottom:12px!important}.round3-event-tray h2{margin-bottom:10px!important}}@media(max-width:900px){.round3-game2-content{padding-inline:clamp(20px,4vw,42px)}.round3-game2-header{padding-right:110px!important}.round3-event-tray>div{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:8px!important}.round3-event-card{padding:8px!important}.round3-event-card p{font-size:9px!important}}
+
+/* Game 2 wrong-answer feedback: a compact, non-layout-shifting notice above the event tray. */
+.round3-game2 .round3-event-tray{position:relative}
+.round3-game2 .round3-game2-feedback{position:absolute;z-index:60;left:50%;top:-66px;bottom:auto;display:flex;flex-direction:column;gap:5px;width:min(360px,calc(100% - 24px));box-sizing:border-box;padding:10px 14px;transform:translateX(-50%);border:1px solid #d7b86e99;border-radius:5px;background:#10271de8;color:#eadbb4;box-shadow:0 8px 22px #06120d66;backdrop-filter:blur(6px);text-align:left;letter-spacing:.02em;animation:round3Game2FeedbackLife 1.8s ease both;pointer-events:none}
+.round3-game2 .round3-game2-feedback:before{content:'◷';position:absolute;left:14px;top:10px;color:#e2c06b;font-size:15px;line-height:1}
+.round3-game2 .round3-game2-feedback b{display:block;margin-left:24px;color:#e8c66e;font-size:10px;font-weight:800;letter-spacing:.14em;line-height:1.35}
+.round3-game2 .round3-game2-feedback span{display:block;margin-left:24px;color:#d5c7a2;font-size:10px;line-height:1.45}
+@keyframes round3Game2FeedbackLife{0%{opacity:0;transform:translate(-50%,4px)}12%{opacity:1;transform:translate(-50%,0)}82%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-2px)}}
+@media(max-width:640px){.round3-game2 .round3-game2-feedback{top:-58px;width:min(320px,calc(100vw - 32px));padding:9px 11px}.round3-game2 .round3-game2-feedback b,.round3-game2 .round3-game2-feedback span{margin-left:22px;font-size:9px}}
