@@ -1,3 +1,5 @@
 node_modules/
 dist/
 *.tsbuildinfo
+.chrome-round6-v2/
+.chrome-*/

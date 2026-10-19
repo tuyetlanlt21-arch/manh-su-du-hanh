@@ -14,13 +14,14 @@ export function ChapterEntryScene() {
   const roundThree = state.currentChapter === 'chapter-03'
   const roundFour = state.currentChapter === 'chapter-04'
   const roundFive = state.currentChapter === 'chapter-05'
-  const begin = () => setLeaving(true)
-  const beginNextRound = () => dispatch({ type: 'START_ROUND_INTRO' })
-  const kicker = roundFive ? 'ROUND V' : roundFour ? 'ROUND IV' : roundThree ? 'ROUND III' : roundTwo ? 'ROUND II' : 'ROUND I'
-  const title = roundFive ? 'KHAI QUẬT LỊCH SỬ' : roundFour ? 'NON SÔNG DẬY SÓNG' : roundThree ? 'DẤU CHÂN KINH ĐÔ' : roundTwo ? 'DỰNG NƯỚC' : 'KHỞI NGUYÊN'
-  const subtitle = roundFive ? 'Những trang sử đang chờ được đánh thức.' : roundFour ? 'Khi lịch sử được quyết định trên chiến trường' : roundThree ? 'Những dấu chân tạo nên bản đồ Đại Việt' : roundTwo ? 'NHỮNG CÂU CHUYỆN ĐẦU TIÊN CỦA LỊCH SỬ' : 'VĂN LANG – ÂU LẠC'
+  const roundSix = state.currentChapter === 'chapter-06'
+  const begin = () => { if (roundSix) dispatch({ type: 'START_ROUND_SIX' }); else setLeaving(true) }
+  const beginNextRound = () => dispatch({ type: roundSix ? 'START_ROUND_SIX' : 'START_ROUND_INTRO' })
+  const kicker = roundSix ? 'ROUND VI' : roundFive ? 'ROUND V' : roundFour ? 'ROUND IV' : roundThree ? 'ROUND III' : roundTwo ? 'ROUND II' : 'ROUND I'
+  const title = roundSix ? 'TRANG SỬ CUỐI CÙNG' : roundFive ? 'KHAI QUẬT LỊCH SỬ' : roundFour ? 'NON SÔNG DẬY SÓNG' : roundThree ? 'DẤU CHÂN KINH ĐÔ' : roundTwo ? 'DỰNG NƯỚC' : 'KHỞI NGUYÊN'
+  const subtitle = roundSix ? 'Năm Mảnh Sử đang chờ được trở về.' : roundFive ? 'Những trang sử đang chờ được đánh thức.' : roundFour ? 'Khi lịch sử được quyết định trên chiến trường' : roundThree ? 'Những dấu chân tạo nên bản đồ Đại Việt' : roundTwo ? 'NHỮNG CÂU CHUYỆN ĐẦU TIÊN CỦA LỊCH SỬ' : 'VĂN LANG – ÂU LẠC'
   const copy = roundThree ? '' : roundTwo ? 'Những ký ức đầu tiên về thời dựng nước đã bị thời gian làm xáo trộn. Hãy nối lại những câu chuyện còn sót lại để tìm đường đến một kinh đô cổ.' : 'Dấu tích của một thời đại đang nằm dưới lớp đất. Hãy tìm và phục dựng những hiện vật để khôi phục ký ức đầu tiên.'
-  return <section className={`chapter-scene chapter-entry-scene ${roundTwo ? 'chapter-two-entry' : ''} ${roundThree ? 'chapter-three-entry' : ''} ${roundFour ? 'chapter-four-entry' : ''} ${leaving ? 'chapter-departing' : ''}`} onAnimationEnd={(event) => { if (leaving && event.animationName === 'chapterToMemory') beginNextRound() }}>
+  return <section className={`chapter-scene chapter-entry-scene ${roundTwo ? 'chapter-two-entry' : ''} ${roundThree ? 'chapter-three-entry' : ''} ${roundFour ? 'chapter-four-entry' : ''} ${roundSix ? 'chapter-six-entry' : ''} ${leaving ? 'chapter-departing' : ''}`} onAnimationEnd={(event) => { if (leaving && event.animationName === 'chapterToMemory') beginNextRound() }}>
     {roundTwo && <img className="chapter-two-landscape" src={openingLandscape} alt=""/>}
     {roundThree && <img className="chapter-two-landscape" src={roundThreeLandscape} alt=""/>}
     {roundFour && <img className="chapter-two-landscape" src={roundFourLandscape} alt=""/>}

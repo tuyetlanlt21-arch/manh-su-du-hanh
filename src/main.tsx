@@ -32,5 +32,6 @@ import './styles/round4-game1-post-ambush.css'
 import './styles/round4-game1-post-ambush-fix.css'
 import './styles/round5.css'
 import './styles/round-shell.css'
+import './styles/round6.css'
 
 createRoot(document.getElementById('root')!).render(<GameProvider><Game /></GameProvider>)
