@@ -1,5 +1,6 @@
 import type { GameAction, GameState } from './gameTypes'
-export const initialGameState: GameState = { currentScene: 'HOME', playerName: '', selectedTraveler: null, currentChapter: null, currentArtifact: null, reconstructedArtifacts: [], completedChapters: [], completedActivities: [], collectedArtifacts: [], collectedCharacters: [], collectedFragments: [] }
+import { getRound6UnlockMissing } from './systems/progression'
+export const initialGameState: GameState = { currentScene: 'HOME', playerName: '', selectedTraveler: null, currentChapter: null, currentArtifact: null, reconstructedArtifacts: [], completedChapters: [], completedActivities: [], collectedArtifacts: [], collectedCharacters: [], collectedFragments: [], round6PuzzleStarted: false, round6PlacedFragments: [], round6VictoryCompleted: false }
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case 'START_JOURNEY': return { ...state, currentScene: 'TRAVELER_SELECTION', playerName: '', selectedTraveler: null }
@@ -12,7 +13,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'RETURN_HOME': return { ...state, currentScene: 'HOME' }
     case 'SELECT_TRAVELER': return { ...state, selectedTraveler: action.traveler }
     case 'CONFIRM_TRAVELER': return state.selectedTraveler && state.playerName.trim() ? { ...state, playerName: state.playerName.trim(), currentScene: 'MAP' } : state
-    case 'ENTER_CHAPTER': return { ...state, currentScene: 'CHAPTER', currentChapter: action.chapterId }
+    case 'ENTER_CHAPTER': return action.chapterId === 'chapter-06' && getRound6UnlockMissing(state).length > 0 ? state : { ...state, currentScene: 'CHAPTER', currentChapter: action.chapterId }
     case 'START_ROUND_INTRO': return state.currentChapter ? { ...state, currentScene: 'ROUND_INTRO' } : state
     case 'SHOW_ROUND_COMPLETION': return state.currentChapter && ['chapter-01', 'chapter-02', 'chapter-03', 'chapter-04'].includes(state.currentChapter) ? { ...state, currentScene: 'ROUND_COMPLETION_CINEMATIC' } : state
     // Round I is replayable: clear its in-progress dig/restoration markers before a fresh run.
@@ -29,6 +30,15 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'COMPLETE_ROUND_FOUR': return state.currentScene === 'ROUND_FOUR_COMPLETE' && !state.completedChapters.includes('chapter-04') ? { ...state, completedChapters: [...state.completedChapters, 'chapter-04'], collectedFragments: state.collectedFragments.includes('fragment-04') ? state.collectedFragments : [...state.collectedFragments, 'fragment-04'] } : state
     case 'START_ROUND_FIVE': return state.currentChapter === 'chapter-05' ? { ...state, currentScene: 'ROUND_FIVE' } : state
     case 'COMPLETE_ROUND_FIVE': return state.currentScene === 'ROUND_FIVE' && !state.completedChapters.includes('chapter-05') ? { ...state, completedChapters: [...state.completedChapters, 'chapter-05'], collectedFragments: state.collectedFragments.includes('fragment-05') ? state.collectedFragments : [...state.collectedFragments, 'fragment-05'] } : state
+    case 'START_ROUND_SIX': return state.currentChapter === 'chapter-06' && getRound6UnlockMissing(state).length === 0 ? { ...state, currentScene: 'ROUND_SIX', completedActivities: state.round6VictoryCompleted ? state.completedActivities.filter((id) => id !== 'round-06-puzzle') : state.completedActivities, round6PuzzleStarted: state.round6VictoryCompleted ? false : state.round6PuzzleStarted, round6PlacedFragments: state.round6VictoryCompleted ? [] : state.round6PlacedFragments, round6VictoryCompleted: false } : state
+    case 'PLACE_ROUND_SIX_FRAGMENT': {
+      if (state.currentScene !== 'ROUND_SIX' || state.round6PlacedFragments.includes(action.fragmentId)) return state
+      const round6PlacedFragments = [...state.round6PlacedFragments, action.fragmentId]
+      return { ...state, round6PlacedFragments, completedActivities: round6PlacedFragments.length === 5 && !state.completedActivities.includes('round-06-puzzle') ? [...state.completedActivities, 'round-06-puzzle'] : state.completedActivities }
+    }
+    case 'START_ROUND_SIX_PUZZLE': return state.currentScene === 'ROUND_SIX' ? { ...state, round6PuzzleStarted: true } : state
+    case 'COMPLETE_ROUND_SIX': return state.currentScene === 'ROUND_SIX' && state.completedActivities.includes('round-06-puzzle') && !state.round6VictoryCompleted ? { ...state, completedChapters: state.completedChapters.includes('chapter-06') ? state.completedChapters : [...state.completedChapters, 'chapter-06'], round6VictoryCompleted: true } : state
+    case 'RESET_ROUND_SIX_REPLAY': return state.currentScene === 'ROUND_SIX' ? { ...state, completedActivities: state.completedActivities.filter((id) => id !== 'round-06-puzzle'), round6PuzzleStarted: false, round6PlacedFragments: [] } : state
     case 'COMPLETE_MEMORY_GAME': return state.currentChapter === 'chapter-02' && !state.completedActivities.includes('chapter-02-memory') ? { ...state, completedActivities: [...state.completedActivities, 'chapter-02-memory'] } : state
     case 'RETURN_TO_CHAPTER': return state.currentChapter ? { ...state, currentScene: 'CHAPTER' } : state
     case 'ENTER_CO_LOA': return state.currentChapter === 'chapter-02' && state.completedActivities.includes('chapter-02-memory') ? { ...state, currentScene: 'CO_LOA_ENTRY' } : state

@@ -1,0 +1,46 @@
+.round6-cinematic-root{position:fixed;inset:0;width:100%;height:100dvh;margin:0;padding:0;overflow:hidden;background:radial-gradient(ellipse at center,#4a2c1b 0%,#28170e 48%,#1a0e09 100%);display:grid;place-items:center;isolation:isolate;z-index:var(--z-cinematic,60)}
+.round6-cinematic-ambient{position:absolute;z-index:0;inset:-6%;display:block;width:112%;height:112%;max-width:none;max-height:none;object-fit:cover;object-position:center;background:radial-gradient(ellipse at center,#4a2c1b,#1a0e09);filter:blur(28px) brightness(.5) saturate(.78);opacity:.48;pointer-events:none;transform:scale(1.08);transform-origin:center}
+.round6-cinematic-ambient-shade{position:absolute;z-index:0;inset:0;pointer-events:none;background:linear-gradient(90deg,#05040366,#0906051c 30%,#0906051c 70%,#05040366),radial-gradient(ellipse at center,transparent 25%,#02010155 100%)}
+.round6-cinematic-edge-fill{position:absolute;z-index:0;inset:0;pointer-events:none;background:linear-gradient(to bottom,#2b190f 0 8%,transparent 13% 86%,#2b190f 94% 100%)}
+.round6-cinematic-video-frame{position:absolute;inset:0 0 6vh;width:100%;height:94%;display:grid;place-items:center;overflow:hidden}
+.round6-cinematic-root .round6-cinematic-video{position:relative;z-index:1;display:block;width:min(100%,calc(94vh * 16 / 9));height:auto;aspect-ratio:16 / 9;min-width:0;min-height:0;max-width:100%;max-height:100%;margin:0;padding:0;object-fit:contain;object-position:50% 50%;transform:none;background:transparent}
+.round6-cinematic-letterbox{position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(to bottom,#23150d 0 8%,#23150dcc 8.8%,transparent 10.8% 88.5%,#23150dcc 90.5%,#23150d 92.5% 100%)}
+.round6-cinematic-brand-mask{position:absolute;z-index:3;right:clamp(76px,8vw,170px);bottom:clamp(90px,16vh,180px);width:clamp(100px,10vw,190px);height:clamp(60px,12vh,130px);pointer-events:none;background:radial-gradient(ellipse at center,#050403 0 34%,#050403ed 54%,transparent 82%);filter:blur(3px)}
+.round6-cinematic-vignette{position:absolute;z-index:2;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,#02010199 100%)}
+.round6-cinematic-controls{position:absolute;z-index:2;right:clamp(18px,4vw,60px);bottom:clamp(18px,4vw,50px);display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.round6-skip,.round6-audio-toggle{padding:9px 14px;border:1px solid #ddad6255;background:#130b09cc;color:#edcf9b;font:inherit;font-size:10px;letter-spacing:.15em;cursor:pointer}
+.round6-skip:hover,.round6-skip:focus-visible,.round6-audio-toggle:hover,.round6-audio-toggle:focus-visible{background:#684422;color:#fff0c5;outline:2px solid #e4b96e;outline-offset:3px}
+.round6-media-recovery{position:absolute;z-index:3;left:50%;top:50%;translate:-50% -50%;width:min(90%,420px);padding:22px;text-align:center;color:#f4e4bf;background:#130b09e8;border:1px solid #c4935077}
+.round6-media-recovery p{margin:0 0 14px}
+
+.round6-achievement-v2{position:fixed;inset:0;min-height:100dvh;box-sizing:border-box;display:grid;grid-template-rows:auto 1fr auto;align-items:center;overflow:hidden;padding:clamp(24px,4vw,58px) clamp(24px,6vw,96px) clamp(20px,3vw,42px);color:#e9d4ad;text-align:center;background:radial-gradient(ellipse 54% 48% at 50% 20%,#b47a3026 0%,#6f43130d 42%,transparent 72%),radial-gradient(ellipse 70% 70% at 50% 100%,#6a3b1712,transparent 64%),#090706}
+.round6-achievement-v2:before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.26;background:repeating-linear-gradient(112deg,transparent 0 19px,#c18a4320 20px,#c18a4300 21px)}
+.round6-achievement-nav,.round6-achievement-content,.round6-achievement-footer{position:relative;z-index:1}
+.round6-achievement-nav{display:flex;justify-content:space-between;gap:24px;color:#b99155;font-family:var(--font-display);font-size:10px;letter-spacing:.18em;text-align:left}
+.round6-achievement-nav span:last-child{text-align:right}
+.round6-achievement-content{align-self:center;justify-self:center;display:flex;flex-direction:column;align-items:center;width:min(100%,760px);padding:clamp(28px,6vh,72px) 0 0}
+.round6-achievement-line{width:1px;height:clamp(42px,7vh,72px);margin-bottom:clamp(20px,3vh,34px);background:linear-gradient(#d5a65a,transparent);animation:round6-achievement-fade .8s ease both}
+.round6-achievement-eyebrow{margin:0;color:#c69a57;font-size:clamp(10px,1vw,12px);letter-spacing:.28em;animation:round6-achievement-fade .8s .16s ease both}
+.round6-achievement-v2 h1{margin:clamp(18px,2.5vh,28px) 0 clamp(18px,2.5vh,28px);color:#f0d6a0;font-family:var(--font-display);font-size:clamp(38px,5.6vw,76px);font-weight:400;line-height:.98;letter-spacing:.08em;text-wrap:balance;animation:round6-achievement-rise .9s .24s ease both}
+.round6-achievement-divider{width:clamp(54px,5vw,78px);height:1px;background:#c79a55;animation:round6-achievement-fade .8s .38s ease both}
+.round6-achievement-v2 blockquote{margin:clamp(20px,3vh,30px) 0 0;color:#d7c09c;font-size:clamp(14px,1.2vw,18px);line-height:1.65;font-style:italic;animation:round6-achievement-fade .8s .46s ease both}
+.round6-achievement-return{margin-top:clamp(26px,4vh,42px);padding:11px 20px;border:1px solid #bd8b4a99;background:#100b08cc;color:#e3bd7b;font:inherit;font-size:10px;letter-spacing:.18em;cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+.round6-achievement-return:hover,.round6-achievement-return:focus-visible{border-color:#e3bd7b;background:#3c2818;color:#fff0c7;outline:2px solid #e4b86f;outline-offset:4px}
+.round6-achievement-footer{margin:0;color:#86663e;font-size:9px;letter-spacing:.2em;animation:round6-achievement-fade .8s .58s ease both}
+@keyframes round6-achievement-fade{from{opacity:0}to{opacity:1}}
+@keyframes round6-achievement-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:600px){.round6-achievement-nav{font-size:8px;letter-spacing:.12em}.round6-achievement-content{padding-top:24px}.round6-achievement-v2 h1{font-size:clamp(34px,12vw,58px)}.round6-achievement-footer{font-size:8px;letter-spacing:.12em}}
+@media(prefers-reduced-motion:reduce){.round6-achievement-line,.round6-achievement-eyebrow,.round6-achievement-v2 h1,.round6-achievement-divider,.round6-achievement-v2 blockquote,.round6-achievement-return,.round6-achievement-footer{animation:none}}
+
+.round6-start{display:grid;place-items:center;box-sizing:border-box;min-height:100dvh;overflow:hidden;text-align:center;background:radial-gradient(ellipse 48% 44% at 50% 42%,#b47a3028 0%,#6f43130b 48%,transparent 76%),#090706}
+.round6-start:before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.25;background:repeating-linear-gradient(112deg,transparent 0 19px,#c18a4320 20px,#c18a4300 21px)}
+.round6-start-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:min(90%,720px);padding:24px}
+.round6-start-line{width:1px;height:clamp(44px,8vh,78px);margin-bottom:clamp(22px,4vh,38px);background:linear-gradient(#d5a65a,transparent)}
+.round6-start-kicker{margin:0;color:#c69a57;font-size:clamp(10px,1vw,12px);letter-spacing:.28em}
+.round6-start h1{margin:18px 0 24px;color:#f0d6a0;font-family:var(--font-display);font-size:clamp(36px,5vw,68px);font-weight:400;line-height:1;letter-spacing:.1em}
+.round6-start-description{margin:0;color:#d7c09c;font-size:clamp(14px,1.2vw,18px);line-height:1.7;font-style:italic}
+.round6-start-button{margin-top:clamp(28px,5vh,48px);padding:12px 22px;border:1px solid #c79a55;background:#100b08cc;color:#e3bd7b;font:inherit;font-size:10px;letter-spacing:.18em;cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+.round6-start-button:hover,.round6-start-button:focus-visible{border-color:#e3bd7b;background:#3c2818;color:#fff0c7;outline:2px solid #e4b86f;outline-offset:4px}
+.round6-start-button:disabled{cursor:default;opacity:.7}
+.round6-start-footer{margin:clamp(36px,8vh,78px) 0 0;color:#86663e;font-size:9px;letter-spacing:.2em}
+@media(max-width:600px){.round6-start h1{font-size:clamp(32px,11vw,54px)}.round6-start-description{font-size:13px}.round6-start-description br{display:none}.round6-start-footer{font-size:8px;letter-spacing:.12em}}

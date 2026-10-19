@@ -1,7 +1,7 @@
-export type Scene = 'HOME' | 'TRAVELER_SELECTION' | 'MAP' | 'CHARACTER_ARCHIVE' | 'ARTIFACT_ARCHIVE' | 'ARTIFACT_DETAIL' | 'CHAPTER' | 'ROUND_INTRO' | 'EXCAVATION' | 'PUZZLE' | 'ARTIFACT_REVEAL' | 'ROUND_COMPLETION_CINEMATIC' | 'ROUND_COMPLETE' | 'ROUND_TWO_COMPLETE' | 'MEMORY_GAME' | 'CO_LOA_ENTRY' | 'ROUND_THREE_INTRO' | 'ROUND_THREE_GAME1' | 'ROUND_THREE_GAME2' | 'ROUND_THREE_COMPLETE' | 'ROUND_THREE_GAME1_COMPLETE' | 'ROUND_FOUR' | 'ROUND_FOUR_COMPLETE' | 'ROUND_FIVE' | 'REWARD'
+export type Scene = 'HOME' | 'TRAVELER_SELECTION' | 'MAP' | 'CHARACTER_ARCHIVE' | 'ARTIFACT_ARCHIVE' | 'ARTIFACT_DETAIL' | 'CHAPTER' | 'ROUND_INTRO' | 'EXCAVATION' | 'PUZZLE' | 'ARTIFACT_REVEAL' | 'ROUND_COMPLETION_CINEMATIC' | 'ROUND_COMPLETE' | 'ROUND_TWO_COMPLETE' | 'MEMORY_GAME' | 'CO_LOA_ENTRY' | 'ROUND_THREE_INTRO' | 'ROUND_THREE_GAME1' | 'ROUND_THREE_GAME2' | 'ROUND_THREE_COMPLETE' | 'ROUND_THREE_GAME1_COMPLETE' | 'ROUND_FOUR' | 'ROUND_FOUR_COMPLETE' | 'ROUND_FIVE' | 'ROUND_SIX' | 'REWARD'
 export type TravelerId = 'male' | 'female'
 export type ChapterStatus = 'LOCKED' | 'AVAILABLE' | 'COMPLETED'
-export type GameState = { currentScene: Scene; playerName: string; selectedTraveler: TravelerId | null; currentChapter: string | null; currentArtifact: string | null; reconstructedArtifacts: string[]; completedChapters: string[]; completedActivities: string[]; collectedArtifacts: string[]; collectedCharacters: string[]; collectedFragments: string[] }
+export type GameState = { currentScene: Scene; playerName: string; selectedTraveler: TravelerId | null; currentChapter: string | null; currentArtifact: string | null; reconstructedArtifacts: string[]; completedChapters: string[]; completedActivities: string[]; collectedArtifacts: string[]; collectedCharacters: string[]; collectedFragments: string[]; round6PuzzleStarted: boolean; round6PlacedFragments: string[]; round6VictoryCompleted: boolean }
 export type GameAction =
   | { type: 'START_JOURNEY' }
   | { type: 'SET_PLAYER_NAME'; playerName: string }
@@ -28,6 +28,11 @@ export type GameAction =
   | { type: 'SHOW_ROUND_FOUR_REWARD' }
   | { type: 'START_ROUND_FIVE' }
   | { type: 'COMPLETE_ROUND_FIVE' }
+  | { type: 'START_ROUND_SIX' }
+  | { type: 'PLACE_ROUND_SIX_FRAGMENT'; fragmentId: string }
+  | { type: 'START_ROUND_SIX_PUZZLE' }
+  | { type: 'RESET_ROUND_SIX_REPLAY' }
+  | { type: 'COMPLETE_ROUND_SIX' }
   | { type: 'COMPLETE_MEMORY_GAME' }
   | { type: 'RETURN_TO_CHAPTER' }
   | { type: 'ENTER_CO_LOA' }
